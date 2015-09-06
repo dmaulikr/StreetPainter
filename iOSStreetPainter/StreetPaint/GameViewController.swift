@@ -31,10 +31,10 @@ class GameViewController: UIViewController {
   let players = Players()
   let board = Board()
   
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupPlayers() // TODO move player init to game start
     
     if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
       // Configure the view.
@@ -46,8 +46,7 @@ class GameViewController: UIViewController {
       skView.ignoresSiblingOrder = true
       
       /* Set the scale mode to scale to fit the window */
-      scene.scaleMode = .AspectFill
-      
+      scene.scaleMode = .ResizeFill
       skView.presentScene(scene)
     }
   }
@@ -57,11 +56,7 @@ class GameViewController: UIViewController {
   }
   
   override func supportedInterfaceOrientations() -> Int {
-    if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-      return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
-    } else {
-      return Int(UIInterfaceOrientationMask.All.rawValue)
-    }
+    return Int(UIInterfaceOrientationMask.Landscape.rawValue)
   }
   
   override func didReceiveMemoryWarning() {
@@ -73,31 +68,21 @@ class GameViewController: UIViewController {
     return true
   }
   
-  @IBAction func handleNotifyPebbleWatches(sender: UIButton) {
-    println("'Notify Pebble Watches' Pressed")
-    let watches = appDelegate.pebbleWatches
-    
-    for watch in watches {
-      let playerId = players.playerIdForDeviceId(watch.serialNumber) // find id
-      let seedData = [0: 99, 1: playerId]; // TODO make protocol function that puts together data
-      
-      watch.appMessagesPushUpdate(seedData as [NSObject : AnyObject], onSent: { (watch: PBWatch!, update: [NSObject : AnyObject]!, error: NSError!) -> Void in
-        if (error == nil) {
-          println("Successfully sent data", update)
-        } else {
-          println("Failed to send data to watches")
-        }
-      })
-    }
-  }
-  
-  func setupPlayers() {
-    let watches = appDelegate.pebbleWatches
-    
-    players.list = watches.map({(watch: PBWatch) -> String in
-      return watch.serialNumber
-    })
-    
-    println(players.list)
-  }
+//  @IBAction func handleNotifyPebbleWatches(sender: UIButton) {
+//    println("'Notify Pebble Watches' Pressed")
+//    let watches = appDelegate.pebbleWatches
+//    
+//    for watch in watches {
+//      let playerId = players.playerIdForDeviceId(watch.serialNumber) // find id
+//      let seedData = [0: 99, 1: playerId]; // TODO make protocol function that puts together data
+//      
+//      watch.appMessagesPushUpdate(seedData as [NSObject : AnyObject], onSent: { (watch: PBWatch!, update: [NSObject : AnyObject]!, error: NSError!) -> Void in
+//        if (error == nil) {
+//          println("Successfully sent data", update)
+//        } else {
+//          println("Failed to send data to watches")
+//        }
+//      })
+//    }
+//  }
 }
