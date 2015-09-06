@@ -47,20 +47,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
   func connectToWatches() {
     for watch in pebbleWatches {
       launchPebbleCompanionApps(watch)
-      addWatchReceiveHandler(watch)
+//      addWatchReceiveHandler(watch)
     }
   }
   
-  func addWatchReceiveHandler(watch: PBWatch) {
-    watch.appMessagesAddReceiveUpdateHandler({(watch: PBWatch!, update: [NSObject : AnyObject]!) -> Bool in
-      println("Got update from watch app!")
-      
-      let updateDict = update as Dictionary
-      println("Data from watch app!", updateDict)
-      
-      return true
-    })
-  }
+//  func addWatchReceiveHandler(watch: PBWatch) {
+//    watch.appMessagesAddReceiveUpdateHandler({(watch: PBWatch!, update: [NSObject : AnyObject]!) -> Bool in
+//      println("Got update from watch app!")
+//      
+//      let updateDict = update as Dictionary
+//      println("Data from watch app!", updateDict)
+//      
+//      return true
+//    })
+//  }
   
   func launchPebbleCompanionApps(watch: PBWatch) {
     println("Attempting to load streetpainter")
