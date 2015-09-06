@@ -254,16 +254,20 @@ static void window_load(Window *window) {
   // layer_set_update_proc(...)
   layer_add_child(window_layer, s_canvas_layer);
 
-  bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
+  bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 128 }, .size = { bounds.size.w, 25 } });
   text_layer_set_text_alignment(bottom_text_layer, GTextAlignmentCenter);
-  // text_layer_set_font(bottom_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_font(bottom_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   layer_add_child(window_layer, text_layer_get_layer(bottom_text_layer));
+  text_layer_set_text(bottom_text_layer, "Error!");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 0, 0));
+
+
 
   player_text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
   // text_layer_set_text_alignment(player_text_layer, GTextAlignmentCenter);
   // text_layer_set_font(player_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   // TODO add background color to player layer
-  layer_add_child(window_layer, text_layer_get_layer(player_text_layer));
+  // layer_add_child(window_layer, text_layer_get_layer(player_text_layer));
 
   resetScreen();
 
