@@ -1,7 +1,5 @@
 #include <pebble.h>
 
-#define TAP_NOT_DATA false
-
 #define KEY_BUTTON_SELECT 9
 
 // StreetPainter Dictionary Protocol Keys
@@ -14,8 +12,11 @@
 // #define VAL_GAME_MODE_
 
 static Window *window;
-static TextLayer *text_layer;
-static TextLayer *s_output_layer;
+static Layer *s_canvas_layer;
+static TextLayer *bottom_text_layer;
+static TextLayer *player_text_layer;
+// static TextLayer *text_layer;
+// static TextLayer *s_output_layer;
 
 static int current_mode = 0;
 static int player_id = -1;
@@ -59,39 +60,13 @@ static void handle_incoming_data(int key, int val) {
         player_id = val;
         static char s_buffer[32];
         snprintf(s_buffer, sizeof(s_buffer), "Player %d", player_id);
-        text_layer_set_text(text_layer, s_buffer);
+        // text_layer_set_text(text_layer, s_buffer);
       } else {
         APP_LOG(APP_LOG_LEVEL_WARNING, "Invalid player id sent.");
       }
       break;
     default:
       APP_LOG(APP_LOG_LEVEL_WARNING, "Tuple with key %d is not defined on the Street Painter app", (int)key);
-  }
-}
-
-static void tap_handler(AccelAxisType axis, int32_t direction) {
-  switch (axis) {
-  case ACCEL_AXIS_X:
-    if (direction > 0) {
-      text_layer_set_text(s_output_layer, "X axis positive.");
-    } else {
-      text_layer_set_text(s_output_layer, "X axis negative.");
-    }
-    break;
-  case ACCEL_AXIS_Y:
-    if (direction > 0) {
-      text_layer_set_text(s_output_layer, "Y axis positive.");
-    } else {
-      text_layer_set_text(s_output_layer, "Y axis negative.");
-    }
-    break;
-  case ACCEL_AXIS_Z:
-    if (direction > 0) {
-      text_layer_set_text(s_output_layer, "Z axis positive.");
-    } else {
-      text_layer_set_text(s_output_layer, "Z axis negative.");
-    }
-    break;
   }
 }
 
@@ -178,54 +153,44 @@ static void accelerometer_data_handler(AccelData *data, uint32_t num_samples) {
   //Show the data
   // text_layer_set_text(s_output_layer, s_buffer);
 
-  static char* direction_text;
-  switch (direction) {
-    case DIRECTION_LEFT:
-      direction_text = "LEFT";
-      break;
-    case DIRECTION_RIGHT:
-      direction_text = "RIGHT";
-      break;
-    case DIRECTION_UP:
-      direction_text = "UP";
-      break;
-    case DIRECTION_DOWN:
-      direction_text = "DOWN";
-      break;
-    case DIRECTION_NONE:
-      direction_text = "NONE";
-      break;
-    default:
-      direction_text = "NONE";
-  }
+  // static char* direction_text;
+  // switch (direction) {
+  //   case DIRECTION_LEFT:
+  //     direction_text = "LEFT";
+  //     break;
+  //   case DIRECTION_RIGHT:
+  //     direction_text = "RIGHT";
+  //     break;
+  //   case DIRECTION_UP:
+  //     direction_text = "UP";
+  //     break;
+  //   case DIRECTION_DOWN:
+  //     direction_text = "DOWN";
+  //     break;
+  //   case DIRECTION_NONE:
+  //     direction_text = "NONE";
+  //     break;
+  //   default:
+  //     direction_text = "NONE";
+  // }
 
   if (direction != DIRECTION_NONE) {
     send(KEY_WATCH_MOVE, direction);
-    text_layer_set_text(s_output_layer, direction_text);
+    // text_layer_set_text(s_output_layer, direction_text);
   }
 }
 
 static void accel_subscribe() {
-  // Use tap service? If not, use data service
-  if (TAP_NOT_DATA) {
-    // Subscribe to the accelerometer tap service
-    accel_tap_service_subscribe(tap_handler);
-  } else {
-    // Subscribe to the accelerometer data service
-    int num_samples = 3;
-    accel_data_service_subscribe(num_samples, accelerometer_data_handler);
+  // Subscribe to the accelerometer data service
+  int num_samples = 3;
+  accel_data_service_subscribe(num_samples, accelerometer_data_handler);
 
-    // Choose update rate
-    accel_service_set_sampling_rate(ACCEL_SAMPLING_10HZ);
-  }
+  // Choose update rate
+  accel_service_set_sampling_rate(ACCEL_SAMPLING_10HZ);
 }
 
 static void accel_unsubscribe() {
-  if (TAP_NOT_DATA) {
-    accel_tap_service_unsubscribe();
-  } else {
-    accel_data_service_unsubscribe();
-  }
+  accel_data_service_unsubscribe();
 }
 
 
@@ -274,26 +239,66 @@ static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
+// Drawing stuff!
+static void resetScreen() {
+// window_set_background_color
+}
+
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
-  text_layer_set_text(text_layer, "Press a button");
-  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(text_layer));
+  // init my stuff
 
+  s_canvas_layer = layer_create(bounds);
+  // layer_set_update_proc(...)
+  layer_add_child(window_layer, s_canvas_layer);
 
-  // TEMP Create debug output TextLayer for accelerometer
-  s_output_layer = text_layer_create(GRect(5, 0, bounds.size.w - 10, bounds.size.h));
-  text_layer_set_font(s_output_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(s_output_layer, "No data yet.");
-  text_layer_set_overflow_mode(s_output_layer, GTextOverflowModeWordWrap);
-  layer_add_child(window_layer, text_layer_get_layer(s_output_layer));
+  bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
+  text_layer_set_text_alignment(bottom_text_layer, GTextAlignmentCenter);
+  // text_layer_set_font(bottom_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  layer_add_child(window_layer, text_layer_get_layer(bottom_text_layer));
+
+  player_text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
+  // text_layer_set_text_alignment(player_text_layer, GTextAlignmentCenter);
+  // text_layer_set_font(player_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  // TODO add background color to player layer
+  layer_add_child(window_layer, text_layer_get_layer(player_text_layer));
+
+  resetScreen();
+
+  // debug
+  // text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
+  // text_layer_set_text(text_layer, "Press a button");
+  // text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
+  // layer_add_child(window_layer, text_layer_get_layer(text_layer));
+  //
+  //
+  // // TEMP Create debug output TextLayer for accelerometer
+  // s_output_layer = text_layer_create(GRect(5, 0, bounds.size.w - 10, bounds.size.h));
+  // text_layer_set_font(s_output_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  // text_layer_set_text(s_output_layer, "No data yet.");
+  // text_layer_set_overflow_mode(s_output_layer, GTextOverflowModeWordWrap);
+  // layer_add_child(window_layer, text_layer_get_layer(s_output_layer));
 }
 
+
+
+static void drawItemScreen() {
+  // fill image with svg
+}
+
+//
+static void drawGameMode(int state) {
+  resetScreen();
+  drawItemScreen();
+}
+
+
 static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
+  text_layer_destroy(bottom_text_layer);
+  text_layer_destroy(player_text_layer);
+  // TODO kill image layer?
 }
 
 static void init(void) {
@@ -317,6 +322,9 @@ static void init(void) {
 
   // Subscribe to the accelerometer data service
   accel_subscribe();
+
+  // DEBUG
+  drawGameMode(0);
 }
 
 
