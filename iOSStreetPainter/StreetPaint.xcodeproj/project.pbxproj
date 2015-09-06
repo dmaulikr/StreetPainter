@@ -1,0 +1,551 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2D695D0804D6D61D55148E74 /* Pods_StreetPaint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A25D5A40904034FA9B75B17 /* Pods_StreetPaint.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		51F53CA11B9B831200DBBB53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CA01B9B831200DBBB53 /* AppDelegate.swift */; };
+		51F53CA31B9B831200DBBB53 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 51F53CA21B9B831200DBBB53 /* GameScene.sks */; };
+		51F53CA51B9B831200DBBB53 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CA41B9B831200DBBB53 /* GameScene.swift */; };
+		51F53CA71B9B831200DBBB53 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CA61B9B831200DBBB53 /* GameViewController.swift */; };
+		51F53CAA1B9B831200DBBB53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51F53CA81B9B831200DBBB53 /* Main.storyboard */; };
+		51F53CAC1B9B831200DBBB53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51F53CAB1B9B831200DBBB53 /* Images.xcassets */; };
+		51F53CAF1B9B831200DBBB53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 51F53CAD1B9B831200DBBB53 /* LaunchScreen.xib */; };
+		51F53CBB1B9B831200DBBB53 /* StreetPaintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CBA1B9B831200DBBB53 /* StreetPaintTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		51F53CB51B9B831200DBBB53 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 51F53C931B9B831200DBBB53 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 51F53C9A1B9B831200DBBB53;
+			remoteInfo = StreetPaint;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		513E8A3C1B9B86FC001532D4 /* StreetPaint-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StreetPaint-Bridging.h"; sourceTree = SOURCE_ROOT; };
+		51F53C9B1B9B831200DBBB53 /* StreetPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreetPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		51F53C9F1B9B831200DBBB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51F53CA01B9B831200DBBB53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		51F53CA21B9B831200DBBB53 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		51F53CA41B9B831200DBBB53 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		51F53CA61B9B831200DBBB53 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		51F53CA91B9B831200DBBB53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		51F53CAB1B9B831200DBBB53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		51F53CAE1B9B831200DBBB53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		51F53CB41B9B831200DBBB53 /* StreetPaintTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StreetPaintTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		51F53CB91B9B831200DBBB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51F53CBA1B9B831200DBBB53 /* StreetPaintTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreetPaintTests.swift; sourceTree = "<group>"; };
+		7A25D5A40904034FA9B75B17 /* Pods_StreetPaint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StreetPaint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A2016374AB028F32755701DC /* Pods-StreetPaint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetPaint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-StreetPaint/Pods-StreetPaint.debug.xcconfig"; sourceTree = "<group>"; };
+		C0C5A65B2B921A5CBAF537DD /* Pods-StreetPaint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StreetPaint.release.xcconfig"; path = "Pods/Target Support Files/Pods-StreetPaint/Pods-StreetPaint.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		51F53C981B9B831200DBBB53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D695D0804D6D61D55148E74 /* Pods_StreetPaint.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51F53CB11B9B831200DBBB53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		51F53C921B9B831200DBBB53 = {
+			isa = PBXGroup;
+			children = (
+				51F53C9D1B9B831200DBBB53 /* StreetPaint */,
+				51F53CB71B9B831200DBBB53 /* StreetPaintTests */,
+				51F53C9C1B9B831200DBBB53 /* Products */,
+				CF0B0FFE765A5ED72D4E174D /* Pods */,
+				EAB288154493CC03C96A1E8F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		51F53C9C1B9B831200DBBB53 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51F53C9B1B9B831200DBBB53 /* StreetPaint.app */,
+				51F53CB41B9B831200DBBB53 /* StreetPaintTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		51F53C9D1B9B831200DBBB53 /* StreetPaint */ = {
+			isa = PBXGroup;
+			children = (
+				51F53CA01B9B831200DBBB53 /* AppDelegate.swift */,
+				513E8A3C1B9B86FC001532D4 /* StreetPaint-Bridging.h */,
+				51F53CA21B9B831200DBBB53 /* GameScene.sks */,
+				51F53CA41B9B831200DBBB53 /* GameScene.swift */,
+				51F53CA61B9B831200DBBB53 /* GameViewController.swift */,
+				51F53CA81B9B831200DBBB53 /* Main.storyboard */,
+				51F53CAB1B9B831200DBBB53 /* Images.xcassets */,
+				51F53CAD1B9B831200DBBB53 /* LaunchScreen.xib */,
+				51F53C9E1B9B831200DBBB53 /* Supporting Files */,
+			);
+			path = StreetPaint;
+			sourceTree = "<group>";
+		};
+		51F53C9E1B9B831200DBBB53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				51F53C9F1B9B831200DBBB53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		51F53CB71B9B831200DBBB53 /* StreetPaintTests */ = {
+			isa = PBXGroup;
+			children = (
+				51F53CBA1B9B831200DBBB53 /* StreetPaintTests.swift */,
+				51F53CB81B9B831200DBBB53 /* Supporting Files */,
+			);
+			path = StreetPaintTests;
+			sourceTree = "<group>";
+		};
+		51F53CB81B9B831200DBBB53 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				51F53CB91B9B831200DBBB53 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CF0B0FFE765A5ED72D4E174D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A2016374AB028F32755701DC /* Pods-StreetPaint.debug.xcconfig */,
+				C0C5A65B2B921A5CBAF537DD /* Pods-StreetPaint.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		EAB288154493CC03C96A1E8F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A25D5A40904034FA9B75B17 /* Pods_StreetPaint.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51F53C9A1B9B831200DBBB53 /* StreetPaint */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51F53CBE1B9B831200DBBB53 /* Build configuration list for PBXNativeTarget "StreetPaint" */;
+			buildPhases = (
+				D902656D3AC9FA4FCCC1B0C3 /* Check Pods Manifest.lock */,
+				51F53C971B9B831200DBBB53 /* Sources */,
+				51F53C981B9B831200DBBB53 /* Frameworks */,
+				51F53C991B9B831200DBBB53 /* Resources */,
+				957469AEBF7F1EFBD2A702F9 /* Embed Pods Frameworks */,
+				5FAE1E5C2FBF039F15FA5172 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StreetPaint;
+			productName = StreetPaint;
+			productReference = 51F53C9B1B9B831200DBBB53 /* StreetPaint.app */;
+			productType = "com.apple.product-type.application";
+		};
+		51F53CB31B9B831200DBBB53 /* StreetPaintTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51F53CC11B9B831200DBBB53 /* Build configuration list for PBXNativeTarget "StreetPaintTests" */;
+			buildPhases = (
+				51F53CB01B9B831200DBBB53 /* Sources */,
+				51F53CB11B9B831200DBBB53 /* Frameworks */,
+				51F53CB21B9B831200DBBB53 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				51F53CB61B9B831200DBBB53 /* PBXTargetDependency */,
+			);
+			name = StreetPaintTests;
+			productName = StreetPaintTests;
+			productReference = 51F53CB41B9B831200DBBB53 /* StreetPaintTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		51F53C931B9B831200DBBB53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Nathanael Beisiegel";
+				TargetAttributes = {
+					51F53C9A1B9B831200DBBB53 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					51F53CB31B9B831200DBBB53 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 51F53C9A1B9B831200DBBB53;
+					};
+				};
+			};
+			buildConfigurationList = 51F53C961B9B831200DBBB53 /* Build configuration list for PBXProject "StreetPaint" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 51F53C921B9B831200DBBB53;
+			productRefGroup = 51F53C9C1B9B831200DBBB53 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				51F53C9A1B9B831200DBBB53 /* StreetPaint */,
+				51F53CB31B9B831200DBBB53 /* StreetPaintTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		51F53C991B9B831200DBBB53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51F53CAF1B9B831200DBBB53 /* LaunchScreen.xib in Resources */,
+				51F53CAC1B9B831200DBBB53 /* Images.xcassets in Resources */,
+				51F53CA31B9B831200DBBB53 /* GameScene.sks in Resources */,
+				51F53CAA1B9B831200DBBB53 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51F53CB21B9B831200DBBB53 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5FAE1E5C2FBF039F15FA5172 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetPaint/Pods-StreetPaint-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		957469AEBF7F1EFBD2A702F9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-StreetPaint/Pods-StreetPaint-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D902656D3AC9FA4FCCC1B0C3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		51F53C971B9B831200DBBB53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51F53CA51B9B831200DBBB53 /* GameScene.swift in Sources */,
+				51F53CA71B9B831200DBBB53 /* GameViewController.swift in Sources */,
+				51F53CA11B9B831200DBBB53 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51F53CB01B9B831200DBBB53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51F53CBB1B9B831200DBBB53 /* StreetPaintTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		51F53CB61B9B831200DBBB53 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 51F53C9A1B9B831200DBBB53 /* StreetPaint */;
+			targetProxy = 51F53CB51B9B831200DBBB53 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		51F53CA81B9B831200DBBB53 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51F53CA91B9B831200DBBB53 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		51F53CAD1B9B831200DBBB53 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51F53CAE1B9B831200DBBB53 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		51F53CBC1B9B831200DBBB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		51F53CBD1B9B831200DBBB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		51F53CBF1B9B831200DBBB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A2016374AB028F32755701DC /* Pods-StreetPaint.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StreetPaint/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"PebbleKit\"",
+					"-framework",
+					"\"PebbleVendor\"",
+					"-weak_framework",
+					"\"CoreBluetooth\"",
+					"-weak_framework",
+					"\"CoreMotion\"",
+					"-weak_framework",
+					"\"ExternalAccessory\"",
+					"-weak_framework",
+					"\"MessageUI\"",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StreetPaint-Bridging.h";
+			};
+			name = Debug;
+		};
+		51F53CC01B9B831200DBBB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0C5A65B2B921A5CBAF537DD /* Pods-StreetPaint.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StreetPaint/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"z\"",
+					"-framework",
+					"\"PebbleKit\"",
+					"-framework",
+					"\"PebbleVendor\"",
+					"-weak_framework",
+					"\"CoreBluetooth\"",
+					"-weak_framework",
+					"\"CoreMotion\"",
+					"-weak_framework",
+					"\"ExternalAccessory\"",
+					"-weak_framework",
+					"\"MessageUI\"",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "StreetPaint-Bridging.h";
+			};
+			name = Release;
+		};
+		51F53CC21B9B831200DBBB53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StreetPaintTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreetPaint.app/StreetPaint";
+			};
+			name = Debug;
+		};
+		51F53CC31B9B831200DBBB53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StreetPaintTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StreetPaint.app/StreetPaint";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		51F53C961B9B831200DBBB53 /* Build configuration list for PBXProject "StreetPaint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51F53CBC1B9B831200DBBB53 /* Debug */,
+				51F53CBD1B9B831200DBBB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51F53CBE1B9B831200DBBB53 /* Build configuration list for PBXNativeTarget "StreetPaint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51F53CBF1B9B831200DBBB53 /* Debug */,
+				51F53CC01B9B831200DBBB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51F53CC11B9B831200DBBB53 /* Build configuration list for PBXNativeTarget "StreetPaintTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51F53CC21B9B831200DBBB53 /* Debug */,
+				51F53CC31B9B831200DBBB53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 51F53C931B9B831200DBBB53 /* Project object */;
+}

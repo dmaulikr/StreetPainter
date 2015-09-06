@@ -1,0 +1,6 @@
+framework module Pods_StreetPaint {
+  umbrella header "Pods-StreetPaint-umbrella.h"
+
+  export *
+  module * { export * }
+}
