@@ -17,7 +17,7 @@
       {
         "type": "raw",
         "name": "ERROR_ICON", 
-        "file": "commands/error_icon"
+        "file": "commands/error_icon.pdc"
       }
     ]
   }

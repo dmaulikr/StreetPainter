@@ -13,6 +13,7 @@
 
 static Window *window;
 static Layer *s_canvas_layer;
+static GDrawCommandImage *s_command_image;
 static TextLayer *bottom_text_layer;
 static TextLayer *player_text_layer;
 // static TextLayer *text_layer;
@@ -35,7 +36,17 @@ const int Z_OFFSET    = 1000;  // Offset gravity on watch
 #define DIRECTION_LEFT 2
 #define DIRECTION_RIGHT 3
 
-
+static void update_proc(Layer *layer, GContext *ctx) {
+  // Place image in the center of the Window 
+  GSize img_size = gdraw_command_image_get_bounds_size(s_command_image);
+  GPoint origin = GPoint(72 - (img_size.w / 2), 84 - (img_size.h / 2));
+  
+  // If the image was loaded successfully...
+  if (s_command_image) {
+    // Draw it
+    gdraw_command_image_draw(ctx, s_command_image, origin);
+  }
+}
 
 static void send(int key, int value) {
   // Create dictionary
@@ -248,18 +259,26 @@ static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  // init my stuff
-
+  // Sets SVG
+  s_command_image = gdraw_command_image_create_with_resource(RESOURCE_ID_ERROR_ICON);
+  if(!s_command_image) {
+    APP_LOG(APP_LOG_LEVEL_ERROR, "Image is NULL!");
+  }
+  
   s_canvas_layer = layer_create(bounds);
-  // layer_set_update_proc(...)
+  layer_set_update_proc(s_canvas_layer, update_proc);
   layer_add_child(window_layer, s_canvas_layer);
-
+  
+  // Sets text layer point on screen and container size
   bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 128 }, .size = { bounds.size.w, 25 } });
+  // Sets text layer left/right/center
   text_layer_set_text_alignment(bottom_text_layer, GTextAlignmentCenter);
   text_layer_set_font(bottom_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   layer_add_child(window_layer, text_layer_get_layer(bottom_text_layer));
   text_layer_set_text(bottom_text_layer, "Error!");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 0, 0));
+  // Sets clear BG color behind text
+  text_layer_set_background_color(bottom_text_layer, GColorClear);
 
 
 
