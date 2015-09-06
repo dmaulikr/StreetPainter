@@ -19,6 +19,7 @@ class GameScene: SKScene {
 //  var player2Position: Position?
   
   override func didMoveToView(view: SKView) {
+    connectToWatches()
     setupPlayers()
     
     /* Setup your scene here */
@@ -45,6 +46,26 @@ class GameScene: SKScene {
 //    board.tileArray[2][2].setColor(TileState.Blue)
 //    player1Position = Position(x: 0, y: 0);
 //    player2Position = Position(x: board.dimensions().x - 1, y: board.dimensions().y - 1)
+  }
+  
+  func connectToWatches() {
+    let watches = appDelegate.pebbleWatches
+
+    for watch in watches {
+      launchPebbleCompanionApps(watch)
+      //      addWatchReceiveHandler(watch)
+    }
+  }
+  
+  func launchPebbleCompanionApps(watch: PBWatch) {
+    println("Attempting to load streetpainter")
+    watch.appMessagesLaunch { (watch: PBWatch!, error: NSError?) -> Void in
+      if (error == nil) {
+        println("Successfully launched StreetPainter")
+      } else {
+        println("Failed to launch StreetPainter")
+      }
+    }
   }
   
   func setupPlayers() {
