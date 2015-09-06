@@ -18,6 +18,41 @@
         "type": "raw",
         "name": "ERROR_ICON", 
         "file": "commands/error_icon.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "PLAYER_BLUE_ICON", 
+        "file": "commands/player_blue.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "PLAYER_RED_ICON", 
+        "file": "commands/player_red.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "PALETTE_ICON", 
+        "file": "commands/palette.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "ROAD_RUNNER_ICON", 
+        "file": "commands/road_runner.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "PAINT_BOMB_ICON", 
+        "file": "commands/paint_bomb.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "DRY_SPELL_ICON", 
+        "file": "commands/dry_spell.pdc"
+      },
+      {
+        "type": "raw",
+        "name": "MANHOLE_ICON",
+        "file": "commands/manhole.pdc"
       }
     ]
   }

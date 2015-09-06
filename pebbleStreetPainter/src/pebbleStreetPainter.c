@@ -16,6 +16,8 @@ static Layer *s_canvas_layer;
 static GDrawCommandImage *s_command_image;
 static TextLayer *bottom_text_layer;
 static TextLayer *player_text_layer;
+static TextLayer *player_bg_layer;
+
 // static TextLayer *text_layer;
 // static TextLayer *s_output_layer;
 
@@ -46,6 +48,18 @@ static void update_proc(Layer *layer, GContext *ctx) {
     // Draw it
     gdraw_command_image_draw(ctx, s_command_image, origin);
   }
+}
+
+static void canvas_set_image(int resource_id) {
+  if (s_command_image) {
+    gdraw_command_image_destroy(s_command_image);
+  }
+  s_command_image = gdraw_command_image_create_with_resource(resource_id);
+  if (!s_command_image) {
+    printf("ERROR: Unable to load image resource %i", resource_id);
+    return;
+  }
+  layer_mark_dirty(s_canvas_layer);
 }
 
 static void send(int key, int value) {
@@ -252,37 +266,45 @@ static void click_config_provider(void *context) {
 
 // Drawing stuff!
 static void resetScreen() {
-// window_set_background_color
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(255, 255, 255));
+  text_layer_set_text(bottom_text_layer, "Error!");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 0, 0));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_ERROR_ICON);
+  
+  text_layer_set_text(player_text_layer, "Player 1");
 }
 
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  // Sets SVG
-  s_command_image = gdraw_command_image_create_with_resource(RESOURCE_ID_ERROR_ICON);
-  if(!s_command_image) {
-    APP_LOG(APP_LOG_LEVEL_ERROR, "Image is NULL!");
-  }
-  
   s_canvas_layer = layer_create(bounds);
   layer_set_update_proc(s_canvas_layer, update_proc);
   layer_add_child(window_layer, s_canvas_layer);
   
   // Sets text layer point on screen and container size
-  bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 128 }, .size = { bounds.size.w, 25 } });
+  bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 128 }, .size = { bounds.size.w, 30 } });
   // Sets text layer left/right/center
   text_layer_set_text_alignment(bottom_text_layer, GTextAlignmentCenter);
   text_layer_set_font(bottom_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   layer_add_child(window_layer, text_layer_get_layer(bottom_text_layer));
-  text_layer_set_text(bottom_text_layer, "Error!");
-  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 0, 0));
   // Sets clear BG color behind text
   text_layer_set_background_color(bottom_text_layer, GColorClear);
 
+  // Sets header bg color
+  player_bg_layer = text_layer_create((GRect) { .origin = {0, 0}, .size = {bounds.size.w, 25} });
+  text_layer_set_background_color(player_bg_layer, GColorWhite);
+  layer_add_child(window_layer, text_layer_get_layer(player_bg_layer));
 
-
-  player_text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
+  player_text_layer = text_layer_create((GRect) { .origin = { 6, 0 }, .size = { bounds.size.w, 23 } });
+  text_layer_set_text_alignment(player_text_layer, GTextAlignmentLeft);
+  text_layer_set_font(player_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+  layer_add_child(window_layer, text_layer_get_layer(player_text_layer));
+  text_layer_set_background_color(player_text_layer, GColorClear);
+  text_layer_set_text_color(player_text_layer, GColorBlack);
   // text_layer_set_text_alignment(player_text_layer, GTextAlignmentCenter);
   // text_layer_set_font(player_text_layer, fonts_get_system_font(FONT_KEY_GOTHIC_24));
   // TODO add background color to player layer
@@ -305,10 +327,75 @@ static void window_load(Window *window) {
   // layer_add_child(window_layer, text_layer_get_layer(s_output_layer));
 }
 
+static void playerConnected() {
+  // window_set_background_color (if player icon is blue, then bg should be red, if player icon is red, bg should be blue)
+  window_set_background_color(window, GColorFromRGB(255, 0, 0));
+  text_layer_set_text(bottom_text_layer, "Connected");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_PLAYER_BLUE_ICON);
+  // RED ICON
+  // canvas_set_image(RESOURCE_ID_PLAYER_RED_ICON);
+}
 
+static void playerPalette() {
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(0, 170, 255));
+  text_layer_set_text(bottom_text_layer, "No Items");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));  
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_PALETTE_ICON);
+}
+
+static void roadRunner() {
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(255, 0, 0));
+  text_layer_set_text(bottom_text_layer, "Road Runner");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_ROAD_RUNNER_ICON);
+}
+
+static void paintBomb() {
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(255, 170, 0));
+  text_layer_set_text(bottom_text_layer, "Paint Bomb");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(0, 0, 0));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_PAINT_BOMB_ICON);
+}
+
+static void drySpell() {
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(170, 85, 255));
+  text_layer_set_text(bottom_text_layer, "Dry Spell");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_DRY_SPELL_ICON);
+}
+
+static void manhole() {
+  // window_set_background_color
+  window_set_background_color(window, GColorFromRGB(0, 170, 255));
+  text_layer_set_text(bottom_text_layer, "Manhole");
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
+  
+  // SETS SPECIFIED SVG ICON
+  canvas_set_image(RESOURCE_ID_MANHOLE_ICON);
+}
 
 static void drawItemScreen() {
-  // fill image with svg
+  playerConnected();
+  playerPalette();
+  roadRunner();
+  paintBomb();
+  drySpell();
+  manhole();
 }
 
 //
