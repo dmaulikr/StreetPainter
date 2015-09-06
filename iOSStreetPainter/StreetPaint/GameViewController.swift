@@ -77,8 +77,6 @@ class GameViewController: UIViewController {
     println("'Notify Pebble Watches' Pressed")
     let watches = appDelegate.pebbleWatches
     
-//    let someData = [0: "something", 1: "another thing"];
-    
     for watch in watches {
       let playerId = players.playerIdForDeviceId(watch.serialNumber) // find id
       let seedData = [0: 99, 1: playerId]; // TODO make protocol function that puts together data
