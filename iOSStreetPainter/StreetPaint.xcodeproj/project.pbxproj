@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D695D0804D6D61D55148E74 /* Pods_StreetPaint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A25D5A40904034FA9B75B17 /* Pods_StreetPaint.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		51D478921B9BE6CA0074D801 /* GameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51D478911B9BE6CA0074D801 /* GameData.swift */; };
 		51F53CA11B9B831200DBBB53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CA01B9B831200DBBB53 /* AppDelegate.swift */; };
 		51F53CA31B9B831200DBBB53 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 51F53CA21B9B831200DBBB53 /* GameScene.sks */; };
 		51F53CA51B9B831200DBBB53 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F53CA41B9B831200DBBB53 /* GameScene.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		513E8A3C1B9B86FC001532D4 /* StreetPaint-Bridging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "StreetPaint-Bridging.h"; sourceTree = SOURCE_ROOT; };
+		51D478911B9BE6CA0074D801 /* GameData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameData.swift; sourceTree = "<group>"; };
 		51F53C9B1B9B831200DBBB53 /* StreetPaint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreetPaint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51F53C9F1B9B831200DBBB53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51F53CA01B9B831200DBBB53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				51F53CA21B9B831200DBBB53 /* GameScene.sks */,
 				51F53CA41B9B831200DBBB53 /* GameScene.swift */,
 				51F53CA61B9B831200DBBB53 /* GameViewController.swift */,
+				51D478911B9BE6CA0074D801 /* GameData.swift */,
 				51F53CA81B9B831200DBBB53 /* Main.storyboard */,
 				51F53CAB1B9B831200DBBB53 /* Images.xcassets */,
 				51F53CAD1B9B831200DBBB53 /* LaunchScreen.xib */,
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51F53CA51B9B831200DBBB53 /* GameScene.swift in Sources */,
+				51D478921B9BE6CA0074D801 /* GameData.swift in Sources */,
 				51F53CA71B9B831200DBBB53 /* GameViewController.swift in Sources */,
 				51F53CA11B9B831200DBBB53 /* AppDelegate.swift in Sources */,
 			);
