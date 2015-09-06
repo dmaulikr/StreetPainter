@@ -27,27 +27,14 @@ extension SKNode {
 
 class GameViewController: UIViewController {
   let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate // grab reference to appdelegate for watches
-  
-  @IBAction func handleNotifyPebbleWatches(sender: UIButton) {
-    println("'Notify Pebble Watches' Pressed")
-    let watches = appDelegate.pebbleWatches
-    
-    let someData = [0: "something", 1: "another thing"];
-    
-    for watch in watches {
-      watch.appMessagesPushUpdate(someData, onSent: { (watch: PBWatch!, update: [NSObject : AnyObject]!, error: NSError!) -> Void in
-        if (error == nil) {
-          println("Successfully sent data", update)
-        } else {
-          println("Failed to send data to watches")
-        }
-      })
-    }
-  }
-  
+//  var gameData = GameData()
+  let players = Players()
+  let board = Board()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    setupPlayers() // TODO move player init to game start
     
     if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
       // Configure the view.
@@ -84,5 +71,35 @@ class GameViewController: UIViewController {
   
   override func prefersStatusBarHidden() -> Bool {
     return true
+  }
+  
+  @IBAction func handleNotifyPebbleWatches(sender: UIButton) {
+    println("'Notify Pebble Watches' Pressed")
+    let watches = appDelegate.pebbleWatches
+    
+//    let someData = [0: "something", 1: "another thing"];
+    
+    for watch in watches {
+      let playerId = players.playerIdForDeviceId(watch.serialNumber) // find id
+      let seedData = [0: 99, 1: playerId]; // TODO make protocol function that puts together data
+      
+      watch.appMessagesPushUpdate(seedData as [NSObject : AnyObject], onSent: { (watch: PBWatch!, update: [NSObject : AnyObject]!, error: NSError!) -> Void in
+        if (error == nil) {
+          println("Successfully sent data", update)
+        } else {
+          println("Failed to send data to watches")
+        }
+      })
+    }
+  }
+  
+  func setupPlayers() {
+    let watches = appDelegate.pebbleWatches
+    
+    players.list = watches.map({(watch: PBWatch) -> String in
+      return watch.serialNumber
+    })
+    
+    println(players.list)
   }
 }

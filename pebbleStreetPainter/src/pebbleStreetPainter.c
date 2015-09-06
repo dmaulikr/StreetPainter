@@ -2,8 +2,20 @@
 
 #define KEY_BUTTON_SELECT 9
 
+// StreetPainter Dictionary Protocol Keys
+#define KEY_GAME_MODE 0
+#define KEY_PLAYER_ID 1
+#define KEY_ITEM_ID 2
+#define KEY_WATCH_MOVE 3
+
+// StreetPainter Dictionary Protocol Values
+// #define VAL_GAME_MODE_
+
 static Window *window;
 static TextLayer *text_layer;
+
+static int currentMode = 0;
+static int playerId = -1;
 
 static void send(int key, int value) {
   // Create dictionary
@@ -17,16 +29,34 @@ static void send(int key, int value) {
   app_message_outbox_send();
 }
 
+
+static void handleIncomingData(int key, int val) {
+  switch(key) {
+    case KEY_GAME_MODE:
+      break;
+    case KEY_PLAYER_ID:
+      if (val != -1) {
+        playerId = val;
+      } else {
+        APP_LOG(APP_LOG_LEVEL_WARNING, "Invalid player id sent.");
+      }
+      break;
+    default:
+      APP_LOG(APP_LOG_LEVEL_WARNING, "Tuple with key %d is not defined on the Street Painter app", (int)key);
+  }
+}
+
+
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Inbox message received!");
 
   Tuple *t = dict_read_first(iterator);
 
   while(t != NULL) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "Tuple %d: %s", (int)t->key, t->value->cstring);
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "Tuple %d: %d", (int)t->key, (int)t->value->int32);
+    handleIncomingData(t->key, t->value->int32);
     t = dict_read_next(iterator);
   }
-
 }
 
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {
@@ -45,7 +75,7 @@ static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
   APP_LOG(APP_LOG_LEVEL_DEBUG, "Select handler");
 
   text_layer_set_text(text_layer, "Select");
-  send(KEY_BUTTON_SELECT, 0);
+  send(KEY_PLAYER_ID, playerId);
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
@@ -85,9 +115,6 @@ static void init(void) {
   });
   const bool animated = true;
   window_stack_push(window, animated);
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Test");
-
-
 
   // Register AppMessage Callbacks
   app_message_register_inbox_received(inbox_received_callback);

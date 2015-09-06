@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
 
   var window: UIWindow?
   var pebbleWatches: [PBWatch] = []
-
+  
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
     initPebble()
@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
   }
   
   func addWatchReceiveHandler(watch: PBWatch) {
-    watch.appMessagesAddReceiveUpdateHandler({(watch: PBWatch!, update: [NSObject : AnyObject]!) -> Bool  in
+    watch.appMessagesAddReceiveUpdateHandler({(watch: PBWatch!, update: [NSObject : AnyObject]!) -> Bool in
       println("Got update from watch app!")
       
       let updateDict = update as Dictionary
