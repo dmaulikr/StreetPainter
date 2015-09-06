@@ -39,10 +39,10 @@ const int Z_OFFSET    = 1000;  // Offset gravity on watch
 #define DIRECTION_RIGHT 3
 
 static void update_proc(Layer *layer, GContext *ctx) {
-  // Place image in the center of the Window 
+  // Place image in the center of the Window
   GSize img_size = gdraw_command_image_get_bounds_size(s_command_image);
   GPoint origin = GPoint(72 - (img_size.w / 2), 84 - (img_size.h / 2));
-  
+
   // If the image was loaded successfully...
   if (s_command_image) {
     // Draw it
@@ -83,9 +83,9 @@ static void handle_incoming_data(int key, int val) {
     case KEY_PLAYER_ID:
       if (val != -1) {
         player_id = val;
-        static char s_buffer[32];
-        snprintf(s_buffer, sizeof(s_buffer), "Player %d", player_id);
-        // text_layer_set_text(text_layer, s_buffer);
+        // static char s_buffer[32];
+        // snprintf(s_buffer, sizeof(s_buffer), "Player %d", player_id);
+        // text_layer_set_text(player_text_layer, s_buffer);
       } else {
         APP_LOG(APP_LOG_LEVEL_WARNING, "Invalid player id sent.");
       }
@@ -243,26 +243,6 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
 }
 
-static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "Select handler");
-
-  send(KEY_PLAYER_ID, player_id);
-}
-
-static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  accel_subscribe();
-  // text_layer_set_text(text_layer, "Up");
-}
-
-static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  accel_unsubscribe();
-}
-
-static void click_config_provider(void *context) {
-  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
-  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
-  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
-}
 
 // Drawing stuff!
 static void resetScreen() {
@@ -270,11 +250,17 @@ static void resetScreen() {
   window_set_background_color(window, GColorFromRGB(255, 255, 255));
   text_layer_set_text(bottom_text_layer, "Error!");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 0, 0));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_ERROR_ICON);
-  
-  text_layer_set_text(player_text_layer, "Player 1");
+
+  if (player_id != -1) {
+    static char s_buffer[32];
+    snprintf(s_buffer, sizeof(s_buffer), "Player %d", player_id);
+    text_layer_set_text(player_text_layer, s_buffer);
+  } else {
+    text_layer_set_text(player_text_layer, "Player X");
+  }
 }
 
 static void window_load(Window *window) {
@@ -284,7 +270,7 @@ static void window_load(Window *window) {
   s_canvas_layer = layer_create(bounds);
   layer_set_update_proc(s_canvas_layer, update_proc);
   layer_add_child(window_layer, s_canvas_layer);
-  
+
   // Sets text layer point on screen and container size
   bottom_text_layer = text_layer_create((GRect) { .origin = { 0, 128 }, .size = { bounds.size.w, 30 } });
   // Sets text layer left/right/center
@@ -332,7 +318,7 @@ static void playerConnected() {
   window_set_background_color(window, GColorFromRGB(255, 0, 0));
   text_layer_set_text(bottom_text_layer, "Connected");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_PLAYER_BLUE_ICON);
   // RED ICON
@@ -343,8 +329,8 @@ static void playerPalette() {
   // window_set_background_color
   window_set_background_color(window, GColorFromRGB(0, 170, 255));
   text_layer_set_text(bottom_text_layer, "No Items");
-  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));  
-  
+  text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_PALETTE_ICON);
 }
@@ -354,7 +340,7 @@ static void roadRunner() {
   window_set_background_color(window, GColorFromRGB(255, 0, 0));
   text_layer_set_text(bottom_text_layer, "Road Runner");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_ROAD_RUNNER_ICON);
 }
@@ -364,7 +350,7 @@ static void paintBomb() {
   window_set_background_color(window, GColorFromRGB(255, 170, 0));
   text_layer_set_text(bottom_text_layer, "Paint Bomb");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(0, 0, 0));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_PAINT_BOMB_ICON);
 }
@@ -374,7 +360,7 @@ static void drySpell() {
   window_set_background_color(window, GColorFromRGB(170, 85, 255));
   text_layer_set_text(bottom_text_layer, "Dry Spell");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_DRY_SPELL_ICON);
 }
@@ -384,31 +370,68 @@ static void manhole() {
   window_set_background_color(window, GColorFromRGB(0, 170, 255));
   text_layer_set_text(bottom_text_layer, "Manhole");
   text_layer_set_text_color(bottom_text_layer, GColorFromRGB(255, 255, 255));
-  
+
   // SETS SPECIFIED SVG ICON
   canvas_set_image(RESOURCE_ID_MANHOLE_ICON);
 }
 
-static void drawItemScreen() {
-  playerConnected();
-  playerPalette();
-  roadRunner();
-  paintBomb();
-  drySpell();
-  manhole();
+static void drawScreen(int state) {
+  switch(state) {
+    case 0:
+      playerConnected();
+      break;
+    case 1:
+      playerPalette();
+      break;
+    case 2:
+      roadRunner();
+      break;
+    case 3:
+      paintBomb();
+      break;
+    case 4:
+      drySpell();
+      break;
+    case 5:
+      manhole();
+      break;
+    default:
+      resetScreen();
+  }
 }
 
-//
 static void drawGameMode(int state) {
   resetScreen();
-  drawItemScreen();
+  drawScreen(state);
 }
-
 
 static void window_unload(Window *window) {
   text_layer_destroy(bottom_text_layer);
   text_layer_destroy(player_text_layer);
   // TODO kill image layer?
+}
+
+static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
+  // accel_subscribe();
+  // text_layer_set_text(text_layer, "Up");
+  current_mode = (current_mode + 1) % 7;
+  drawGameMode(current_mode);
+}
+
+static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
+  // accel_unsubscribe();
+}
+
+static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "Select handler");
+
+  send(KEY_PLAYER_ID, player_id);
+}
+
+static void click_config_provider(void *context) {
+  window_single_click_subscribe(BUTTON_ID_SELECT, select_click_handler);
+  window_single_click_subscribe(BUTTON_ID_UP, up_click_handler);
+  window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
 static void init(void) {
@@ -433,8 +456,8 @@ static void init(void) {
   // Subscribe to the accelerometer data service
   accel_subscribe();
 
-  // DEBUG
-  drawGameMode(0);
+  // DEBUG start in one mode
+  drawGameMode(current_mode);
 }
 
 
