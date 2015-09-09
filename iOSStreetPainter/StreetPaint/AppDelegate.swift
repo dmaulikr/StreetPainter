@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBPebbleCentralDelegate {
     
     initPebble()
     setPebbleAppUUID()
-    connectToWatches()
+//    connectToWatches()
     
     return true
   }
